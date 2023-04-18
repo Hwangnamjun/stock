@@ -63,6 +63,10 @@ public class Searchaction implements Action{
 				forward=new Actionforward();
 				forward.setPath("detail.it");
 				forward.setRedirect(false);
+			} else if(pageNm.contains("dashBoard")) {
+				forward=new Actionforward();
+				forward.setPath("detail.it");
+				forward.setRedirect(false);
 			}
 			
 		} catch (Customexception e) {
