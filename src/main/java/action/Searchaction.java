@@ -23,8 +23,8 @@ public class Searchaction implements Action{
 		
 		try {
 			String target = request.getParameter("targetNm");
-			String startDT = request.getParameter("startDt").replace("-", "");
-			String endDT = request.getParameter("endDt").replace("-", "");
+			String startDT = request.getParameter("startDt");
+			String endDT = request.getParameter("endDt");
 			String pageNm = request.getParameter("pageNm");
 			
 			ArrayList<Resultbean> result = new ArrayList<>();
