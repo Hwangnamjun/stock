@@ -4,22 +4,6 @@
 <%@page import="bean.Resultbean"%>
 <%@page import="java.util.ArrayList"%>
 <%@page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%
-request.setCharacterEncoding("UTF-8");
-HttpSession resultSession = request.getSession();
-
-boolean ins = resultSession.getAttribute("result") != null && resultSession.getAttribute("target") != null
-		   && resultSession.getAttribute("leng") != null ? true : false;
-
-ArrayList<Resultbean> arr = (ArrayList<Resultbean>) resultSession.getAttribute("result");
-StringTokenizer target = null;
-StringTokenizer leng = null;
-
-if (ins) {
-	target = new StringTokenizer(resultSession.getAttribute("target").toString(), ",");
-	leng = new StringTokenizer(resultSession.getAttribute("leng").toString(), ",");
-}
-%>
 <!DOCTYPE html>
 <html>
 <head>

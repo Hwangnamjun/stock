@@ -86,52 +86,6 @@ public class Frontcontroller extends HttpServlet{
 			break;
 		}
 		
-		/*
-		if(command.equals("/mainview/search.it")) {
-			
-			action = new Searchaction();
-			forward = action.execute(request, response);
-			
-		} else if(command.equals("/mainview/resultTable.it")) {
-			
-			forward=new Actionforward();
-			forward.setPath("/mainview/Resulttable.jsp");
-			
-		} else if(command.equals("/mainview/resultChart.it")) {
-			
-			forward=new Actionforward();
-			forward.setPath("/mainview/Resultchart.jsp");
-			
-		} else if(command.equals("/mainview/corp.it")) {
-			
-			action = new Updatedbaction();
-			forward = action.execute(request, response);
-			
-		} else if(command.equals("/mainview/detail.it")) {
-			
-			forward=new Actionforward();
-			forward.setPath("/mainview/Detailresult.jsp");
-			
-		} else if(command.equals("/mainview/ajaxChart.it")) {
-			
-			action = new Ajaxaction();
-			forward = action.execute(request, response);
-			
-		} else if(command.equals("/mainview/ajaxKategorie.it")) {
-			
-			action = new Kategorieaction().settingbool(true);
-			forward = action.execute(request, response);
-			
-		} else if(command.equals("/mainview/ajaxKategorie2.it")) {
-			
-			action = new Kategorieaction().settingbool(false);
-			forward = action.execute(request, response);
-			
-		}
-		*/
-		
-		
-		
 		if(forward!=null) 
 		{
 			if(forward.isRedirect()) {
