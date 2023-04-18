@@ -1,38 +1,37 @@
 package bean;
 
-import java.io.Serializable;
+public class Resultbean {
 
-public class Resultbean implements Serializable{
-
-	String baseYmd;
-	String stockCode;
-	String corpName;
-	long clpr;
-	long vs;
-	String fltRate;
-	long mkp;
-	long hipr;
-	long lopr;
-	long trqu;
-	long trprc;
-	long lstGstCnt;
-	long mktTotAmt;
-	long thsIncome;
-	long frmIncome;
-	long bfefrmIncome;
-	long thsAssets;
-	long frmAssets;
-	long bfefrmAssets;
-	long thsDebt;
-	long frmDebt;
-	long bfefrmDebt;
-	long thsTotCap;
-	long frmTotCap;
-	long bfefrmTotCap;
-	long eps;
-	long per;
-	long bps;
-	long pbr;
+	private String baseYmd;
+	private	String stockCode;
+	private	String corpName;
+	private	long clpr;
+	private	long vs;
+	private	String fltRate;
+	private	long mkp;
+	private	long hipr;
+	private	long lopr;
+	private	long trqu;
+	private	long trprc;
+	private	long lstGstCnt;
+	private	long mktTotAmt;
+	private	long thsIncome;
+	private	long frmIncome;
+	private	long bfefrmIncome;
+	private	long thsAssets;
+	private	long frmAssets;
+	private	long bfefrmAssets;
+	private	long thsDebt;
+	private	long frmDebt;
+	private	long bfefrmDebt;
+	private	long thsTotCap;
+	private	long frmTotCap;
+	private	long bfefrmTotCap;
+	private	long eps;
+	private	long per;
+	private	long bps;
+	private	long pbr;
+	
 	public String getBaseYmd() {
 		return baseYmd;
 	}
