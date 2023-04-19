@@ -36,12 +36,16 @@ public class Searchmain {
 
 		ArrayList<Infobean> arr = new ArrayList<Infobean>();
 		String sql = "SELECT A.CORP_CODE, A.STOCK_CODE, A.CORP_NAME, A.BIZR_NO, A.INDUTY_CODE, a.jurir_no "
-				+ "  FROM HWANG.UNIQUE_CORPCODE A, HWANG.UNIQUE_CORPBLANACE B " 
-				+ " WHERE A.STOCK_CODE = B.STOCK_CODE"
-				+ "   AND A.JURIR_NO IS NOT NULL"
-				+ "   and A.STOCK_CODE = '032680'";
+				   + "  FROM HWANG.UNIQUE_CORPCODE A, HWANG.UNIQUE_CORPBLANACE B " 
+				   + " WHERE A.STOCK_CODE = B.STOCK_CODE"
+				   + "   AND A.JURIR_NO IS NOT NULL"
+				   + "   AND A.STOCK_CODE IN (SELECT STOCK_CODE "
+				   + "  FROM UNIQUE_CORPSTOCK "
+				   + " GROUP BY STOCK_CODE "
+				   + "HAVING MAX(BASE_YMD) != '20230418')";
 
 		try {
+			System.out.println(conn.isClosed());
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -71,19 +75,16 @@ public class Searchmain {
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
-			System.out.print((i + 1) + "/" + cnt + " (" + arr.get(i).getTarget() + ") : ");
-			String reprtUrl = new Reprturl().chkUrl(arr.get(i));
-			String reprtResult = new Reprtparse().getDate(reprtUrl);
-			System.out.println(new Reprtinsert().insertData(reprtResult, arr.get(i)));
-			new Reprtinsert().Updateparm();
-			
-			
-			/*
-			 * String stockUrl = new Stockurl().chkUrl(arr.get(i)); String stockResult = new
-			 * Stockparse().getData(stockUrl); new
-			 * Stockinsert().insertData(stockResult,arr.get(i));
-			 */
-			
+			System.out.print((i + 1) + "/" + cnt + " (" + arr.get(i).getTarget()+ ") : ");
+			/*			String reprtUrl = new Reprturl().chkUrl(arr.get(i));
+						String reprtResult = new Reprtparse().getDate(reprtUrl);
+						System.out.println(new Reprtinsert().insertData(reprtResult, arr.get(i)));
+						new Reprtinsert().Updateparm();*/
+
+
+			String stockUrl = new Stockurl().chkUrl(arr.get(i)); 
+			String stockResult = new Stockparse().getData(stockUrl); 
+			new	Stockinsert().insertData(stockResult,arr.get(i));
 		}
 	}
 
@@ -107,7 +108,8 @@ public class Searchmain {
 		}
 	}
 
-	public ArrayList<Resultbean> Startwork(Infobean bean) throws Customexception {
+	public ArrayList<Resultbean> Startwork(Infobean bean)
+			throws Customexception {
 
 		ArrayList<Resultbean> result = null;
 		bean.setPageRow("1000");

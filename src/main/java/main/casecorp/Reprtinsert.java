@@ -348,7 +348,8 @@ public class Reprtinsert {
 		while(rs.next()) {
 			mapper.put(rs.getString(1), Double.parseDouble(rs.getString(2).replaceAll(",", "")));
 		}
-		
+		pstmt.close();
+		Connect.setClose();
 		return mapper;
 	}
 }

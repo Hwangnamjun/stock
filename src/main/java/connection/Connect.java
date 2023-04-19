@@ -14,7 +14,7 @@ public class Connect {
     private static Connection conn;
 	
 	public static Connection getInstance() {
-		
+
 		if(conn == null) {
 			try {
 	            Context ctx = new InitialContext();

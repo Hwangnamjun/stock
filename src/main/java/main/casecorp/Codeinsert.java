@@ -203,9 +203,6 @@ public class Codeinsert {
 		    
 		    conn.commit();
 		    
-		    pstmt.close();
-		    Connect.setClose();
-
 		} catch (Exception e) {
 			try {
 				conn.rollback();
