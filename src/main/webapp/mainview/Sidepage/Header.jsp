@@ -28,18 +28,9 @@ if(ins) {
 <meta name="author" content="" />
 <link href="css/styles.css" rel="stylesheet" />
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" >
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker.min.css" 
-	  integrity="sha512-mSYUmp1HYZDFaVKK//63EcZq4iFWFjxSL+Z3T/aCt4IO9Cejm03q3NKKYN6pFQzY0SBOr8h+eCIAZHPXcpZaNw==" crossorigin="anonymous" 
-	  referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/css/bootstrap-datepicker3.standalone.min.css">
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/js/bootstrap-datepicker.min.js" 
-		integrity="sha512-T/tUfKSV1bihCnd+MxKD0Hm1uBBroVYBOYSk1knyvQ9VyZJpc/ALb4P0r6ubwVPSGB2GvjeoMAJJImBG12TiaQ==" crossorigin="anonymous" 
-		referrerpolicy="no-referrer"></script>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.9.0/locales/bootstrap-datepicker.ko.min.js" 
-		integrity="sha512-L4qpL1ZotXZLLe8Oo0ZyHrj/SweV7CieswUODAAPN/tnqN3PA1P+4qPu5vIryNor6HQ5o22NujIcAZIfyVXwbQ==" crossorigin="anonymous" 
-		referrerpolicy="no-referrer"></script>
+<link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 		
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"	crossorigin="anonymous"></script>
 </head>
@@ -55,10 +46,10 @@ if(ins) {
 		<form
 			class="d-none d-md-inline-block form-inline me-auto ms-0 ms-md-3 my-2 my-md-0" action="search.it" method="post">
 			<div class="input-group flex-nowrap" style="width: 1000px;">
-				<input class="form-control col-md-8" type="text" placeholder="회사명1,회사명2..." 
+				<input class="form-control col-md-10" type="text" placeholder="회사명1,회사명2..." 
 				aria-label="Search for..." aria-describedby="btnNavbarSearch" name="targetNm" <%if(ins) {%> value="<%=target %>" <%} %> required="required" />
-				<input type="text" id="datePicker_b" class="form-control col-md-2" placeholder="시작일" name="startDt" <%if(ins) {%> value="<%=startDt %>" <%} %> required="required"/>
-				<input type="text" id="datePicker_e" class="form-control col-md-2" placeholder="종료일" name="endDt" <%if(ins) {%> value="<%=endDt %>" <%} %> required="required"/>
+				<input type="text" id="datePicker_b" class="form-control col-md-1" placeholder="시작일" name="startDt" <%if(ins) {%> value="<%=startDt %>" <%} %> required="required" readonly="readonly"/>
+				<input type="text" id="datePicker_e" class="form-control col-md-1" placeholder="종료일" name="endDt" <%if(ins) {%> value="<%=endDt %>" <%} %> required="required" readonly="readonly"/>
 				<input type="hidden" name="pageNm" value="<%=request.getRequestURL().toString() %>" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="submit">
 					<i class="fas fa-search"></i>
@@ -73,54 +64,40 @@ if(ins) {
 		var strDate = $("#datePicker_b").val();
 		var edDate = $("#datePicker_e").val();
 		
-		$('#datePicker_b').datepicker({
-			format: "yyyymmdd",
-	        endDate: '+0d', //달력에서 선택 할 수 있는 가장 느린 날짜. 이후로 선택 불가 ( d : 일 m : 달 y : 년 w : 주)
-	        autoclose: true, //사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
-	        clearBtn: false, //날짜 선택한 값 초기화 해주는 버튼 보여주는 옵션 기본값 false 보여주려면 true
-	        daysOfWeekDisabled: [0, 6], //선택 불가능한 요일 설정 0 : 일요일 ~ 6 : 토요일
-	        isableTouchKeyboard: false, //모바일에서 플러그인 작동 여부 기본값 false 가 작동 true가 작동 안함.
-	        immediateUpdates: false, //사용자가 보는 화면으로 바로바로 날짜를 변경할지 여부 기본값 :false
-	        multidate: false, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false
-	        multidateSeparator: ',', //여러 날짜를 선택했을 때 사이에 나타나는 글짜 2019-05-01,2019-06-01
-	        templates: {
-	           leftArrow: '&laquo;',
-	           rightArrow: '&raquo;',
-	        }, //다음달 이전달로 넘어가는 화살표 모양 커스텀 마이징
-	        showWeekDays: true, // 위에 요일 보여주는 옵션 기본값 : true
-	        title: '시작일', //캘린더 상단에 보여주는 타이틀
-	        weekStart: 0, //달력 시작 요일 선택하는 것 기본값은 0인 일요일
-	        language: 'ko', //달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
-		})
-		.on('changeDate', function(){
-			var target = $("#datePicker_b").val();
-			$('#datePicker_e').datepicker("setStartDate", target.substring(0,4)+'-'+target.substring(4,6)+'-'+target.substring(6));
-		});
-		
-		$('#datePicker_e').datepicker({
-			format: "yyyymmdd",
-	        endDate: '+0d', //달력에서 선택 할 수 있는 가장 느린 날짜. 이후로 선택 불가 ( d : 일 m : 달 y : 년 w : 주)
-	        autoclose: true, //사용자가 날짜를 클릭하면 자동 캘린더가 닫히는 옵션
-	        clearBtn: false, //날짜 선택한 값 초기화 해주는 버튼 보여주는 옵션 기본값 false 보여주려면 true
-	        daysOfWeekDisabled: [0, 6], //선택 불가능한 요일 설정 0 : 일요일 ~ 6 : 토요일
-	        isableTouchKeyboard: false, //모바일에서 플러그인 작동 여부 기본값 false 가 작동 true가 작동 안함.
-	        immediateUpdates: false, //사용자가 보는 화면으로 바로바로 날짜를 변경할지 여부 기본값 :false
-	        multidate: false, //여러 날짜 선택할 수 있게 하는 옵션 기본값 :false
-	        multidateSeparator: ',', //여러 날짜를 선택했을 때 사이에 나타나는 글짜 2019-05-01,2019-06-01
-	        templates: {
-	           leftArrow: '&laquo;',
-	           rightArrow: '&raquo;',
-	        }, //다음달 이전달로 넘어가는 화살표 모양 커스텀 마이징
-	        showWeekDays: true, // 위에 요일 보여주는 옵션 기본값 : true
-	        title: '종료일', //캘린더 상단에 보여주는 타이틀
-	        weekStart: 0, //달력 시작 요일 선택하는 것 기본값은 0인 일요일
-	        language: 'ko', //달력의 언어 선택, 그에 맞는 js로 교체해줘야한다.
-		})
-		.on("changeDate", function(){
-			var target = $("#datePicker_e").val();
-			$('#datePicker_b').datepicker("setEndDate", target.substring(0,4)+'-'+target.substring(4,6)+'-'+target.substring(6));
-			console.log($('#datePicker_e').val());
-		});
+		   $(function() {
+		       $("#datePicker_b,#datePicker_e").datepicker({
+		            dateFormat: 'yy-mm-dd' //달력 날짜 형태
+		           ,showOtherMonths: true //빈 공간에 현재월의 앞뒤월의 날짜를 표시
+		           ,showMonthAfterYear:true // 월- 년 순서가아닌 년도 - 월 순서
+		           ,changeYear: true //option값 년 선택 가능
+		           ,changeMonth: true //option값  월 선택 가능                
+		           ,showOn: "both" //button:버튼을 표시하고,버튼을 눌러야만 달력 표시 ^ both:버튼을 표시하고,버튼을 누르거나 input을 클릭하면 달력 표시  
+		           ,buttonImage: "http://jqueryui.com/resources/demos/datepicker/images/calendar.gif" //버튼 이미지 경로
+		           ,buttonImageOnly: false
+		           ,buttonText: "선택" //버튼 호버 텍스트              
+		           ,yearSuffix: "년" //달력의 년도 부분 뒤 텍스트
+		           ,monthNamesShort: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 텍스트
+		           ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
+		           ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
+		           ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
+		           ,minDate: "-5Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+		           ,maxDate: "today" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)  
+				   ,onSelect: function(dateText) {
+				        console.log("Selected date: " + dateText + "; input's current value: " + this.id);
+				        if(this.id == "datePicker_b") {
+				        	$("#datePicker_e").datepicker("option","minDate", dateText);
+				        } else if(this.id == "datePicker_e") {
+				        	$("#datePicker_b").datepicker("option","maxDate", dateText);
+				        }
+				   }
+				   ,beforeShowDay: function(date){
+						var day = date.getDay();
+						return [(day != 0 && day != 6)];
+				   }
+		       });
+		       $("#datePicker_b,#datePicker_e").datepicker('setDate', 'today');           
+		   });
+
 	</script>
 </body>
 </html>

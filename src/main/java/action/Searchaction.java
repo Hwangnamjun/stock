@@ -23,8 +23,8 @@ public class Searchaction implements Action{
 		
 		try {
 			String target = request.getParameter("targetNm");
-			String startDT = request.getParameter("startDt");
-			String endDT = request.getParameter("endDt");
+			String startDT = request.getParameter("startDt").replaceAll("-", "");
+			String endDT = request.getParameter("endDt").replaceAll("-", "");
 			String pageNm = request.getParameter("pageNm");
 			
 			ArrayList<Resultbean> result = new ArrayList<>();
@@ -50,7 +50,6 @@ public class Searchaction implements Action{
 			session.setAttribute("startDt", request.getParameter("startDt"));
 			session.setAttribute("endDt", request.getParameter("endDt"));
 			session.setAttribute("leng", leng.toString());
-			
 			if(pageNm.contains("table")) {
 				forward=new Actionforward();
 				forward.setPath("resultTable.it");
@@ -63,7 +62,7 @@ public class Searchaction implements Action{
 				forward=new Actionforward();
 				forward.setPath("detail.it");
 				forward.setRedirect(false);
-			} else if(pageNm.contains("dashBoard")) {
+			} else if(pageNm.contains("Dashboard")) {
 				forward=new Actionforward();
 				forward.setPath("detail.it");
 				forward.setRedirect(false);
