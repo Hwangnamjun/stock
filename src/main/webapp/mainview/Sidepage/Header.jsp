@@ -44,12 +44,12 @@ if(ins) {
 		</button>
 		<!-- Navbar Search-->
 		<form
-			class="d-none d-md-inline-block form-inline me-auto ms-0 ms-md-3 my-2 my-md-0" action="search.it" method="post">
+			class="d-none d-md-inline-block form-inline me-auto ms-0 ms-md-3 my-2 my-md-0 w-auto" action="search.it" method="post">
 			<div class="input-group flex-nowrap" style="width: 1000px;">
-				<input class="form-control col-md-10" type="text" placeholder="회사명1,회사명2..." 
+				<input class="form-control col-md-8 w-50" type="text" placeholder="회사명1,회사명2..." 
 				aria-label="Search for..." aria-describedby="btnNavbarSearch" name="targetNm" <%if(ins) {%> value="<%=target %>" <%} %> required="required" />
-				<input type="text" id="datePicker_b" class="form-control col-md-1" placeholder="시작일" name="startDt" <%if(ins) {%> value="<%=startDt %>" <%} %> required="required" readonly="readonly"/>
-				<input type="text" id="datePicker_e" class="form-control col-md-1" placeholder="종료일" name="endDt" <%if(ins) {%> value="<%=endDt %>" <%} %> required="required" readonly="readonly"/>
+				<input type="text" id="datePicker_b" class="form-control col-md-2 w-5" placeholder="시작일" name="startDt" <%if(ins) {%> value="<%=startDt %>" <%} %> required="required" readonly="readonly"/>
+				<input type="text" id="datePicker_e" class="form-control col-md-2 w-5" placeholder="종료일" name="endDt" <%if(ins) {%> value="<%=endDt %>" <%} %> required="required" readonly="readonly"/>
 				<input type="hidden" name="pageNm" value="<%=request.getRequestURL().toString() %>" />
 				<button class="btn btn-primary" id="btnNavbarSearch" type="submit">
 					<i class="fas fa-search"></i>
@@ -80,7 +80,7 @@ if(ins) {
 		           ,monthNames: ['1월','2월','3월','4월','5월','6월','7월','8월','9월','10월','11월','12월'] //달력의 월 부분 Tooltip
 		           ,dayNamesMin: ['일','월','화','수','목','금','토'] //달력의 요일 텍스트
 		           ,dayNames: ['일요일','월요일','화요일','수요일','목요일','금요일','토요일'] //달력의 요일 Tooltip
-		           ,minDate: "-5Y" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
+		           ,minDate: "2020-01-01" //최소 선택일자(-1D:하루전, -1M:한달전, -1Y:일년전)
 		           ,maxDate: "today" //최대 선택일자(+1D:하루후, -1M:한달후, -1Y:일년후)  
 				   ,onSelect: function(dateText) {
 				        console.log("Selected date: " + dateText + "; input's current value: " + this.id);
@@ -95,7 +95,9 @@ if(ins) {
 						return [(day != 0 && day != 6)];
 				   }
 		       });
-		       $("#datePicker_b,#datePicker_e").datepicker('setDate', 'today');           
+		       $("#datePicker_b").datepicker('setDate', strDate);
+		       $("#datePicker_e").datepicker('setDate', edDate);
+		       
 		   });
 
 	</script>

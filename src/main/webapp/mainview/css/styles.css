@@ -11244,5 +11244,10 @@ body {
 }
 
 .ui-datepicker-trigger {
-	border:none;
+	border: none;
+	background-color: white;
+}
+
+.ui-datepicker-trigger img {
+	object-fit: contain;
 }
