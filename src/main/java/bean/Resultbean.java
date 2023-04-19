@@ -1,6 +1,9 @@
 package bean;
 
-public class Resultbean {
+import java.io.Serializable;
+
+@SuppressWarnings("serial")
+public class Resultbean implements Serializable{
 
 	private String baseYmd;
 	private	String stockCode;
