@@ -17,9 +17,9 @@ public class Updatedbaction implements Action {
 		
 		bean.setStartDT(request.getParameter("startDt").replaceAll("-", ""));
 		bean.setEndDT(request.getParameter("endDt").replaceAll("-", ""));
-		bean.setTarget(request.getParameter("targetNm"));
+		bean.setTarget(request.getParameter("group"));
 		
-		if(!(request.getParameter("targetNm").length() == 0))
+		if(request.getParameter("group").length() == 1)
 			new Searchmain().testall(bean);
 		
 		response.setContentType("text/html;charset=UTF-8"); 

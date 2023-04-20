@@ -52,7 +52,12 @@ if(ins) {
 				<button class="btn btn-primary" id="btnNavbarSearch" type="submit">
 					<i class="fas fa-search"></i>
 				</button>
-				<div><button class="btn btn-primary" type="button" onclick="return submit2(this.form);">코드 수동갱신</button></div>
+			</div>
+				<button class="btn btn-primary" type="button" style="margin-left: 1080px; position: absolute; top: 10px;" 
+				onclick="return submit2(this.form);">코드 수동갱신</button>
+			<div style="margin-left: 1080px; position: absolute; top: 60px; font-size: small;">
+				<input type="radio" name="group" value="0" />제무제표
+  			  	<input type="radio" name="group" checked="checked" value="1"/> 주식시세
 			</div>
 		</form>
 	</nav>
