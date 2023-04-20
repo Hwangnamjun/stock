@@ -27,11 +27,9 @@ if(ins) {
 <meta name="description" content="" />
 <meta name="author" content="" />
 <link href="css/styles.css" rel="stylesheet" />
-
 <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-		
 <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js"	crossorigin="anonymous"></script>
 </head>
 <body>
@@ -54,12 +52,19 @@ if(ins) {
 				<button class="btn btn-primary" id="btnNavbarSearch" type="submit">
 					<i class="fas fa-search"></i>
 				</button>
+				<div><button class="btn btn-primary" type="button" onclick="return submit2(this.form);">코드 수동갱신</button></div>
 			</div>
 		</form>
-		<!-- <button class="btn btn-primary" type="button" style="margin-right: 10px;" onclick="location.href='corp.it';">코드 수동갱신</button> -->
 	</nav>
 	<script type="text/javascript" src="./js/bootstrap.js"></script>
 	<script src="js/scripts.js"></script>
+	<script type="text/javascript">
+	  function submit2(frm) { 
+		    frm.action='corp.it'; 
+		    frm.submit(); 
+		    return true; 
+		  } 
+	</script>
 	<script>
 		var strDate = $("#datePicker_b").val();
 		var edDate = $("#datePicker_e").val();

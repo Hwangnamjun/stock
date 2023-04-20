@@ -146,57 +146,48 @@ public class Reprtinsert {
 		}
 
 		Insertdb(bean);
+		
+		if(bean.getStockCode().equals("032680")) {
+			Updateparm(true);
+		} else if(bean.getStockCode().equals("404990")) {
+			Updateparm(false);
+		}
 
+		
 		return res;
 	}
 	
-	public void Updateparm() {
+	public void Updateparm(boolean tnf) {
 		Connection conn = Connect.getInstance();
 		PreparedStatement pstmt = null;
+		String sql;
 		try {
-			String sql = "UPDATE UNIQUE_CORPBLANACE "
-					   + "   SET THS_INCOME       = THS_INCOME / 1000000 "
-					   + "     , FRM_INCOME       = FRM_INCOME / 1000000 "
-					   + "     , BFE_FRM_INCOME   = BFE_FRM_INCOME / 1000000 "
-					   + "     , THS_ASSETS       = THS_ASSETS / 1000000 "
-					   + "     , FRM_ASSETS       = FRM_ASSETS / 1000000 "
-					   + "     , BFE_FRM_ASSETS   = BFE_FRM_ASSETS / 1000000 "
-					   + "     , THS_DEBT         = THS_DEBT / 1000000 "
-					   + "     , FRM_DEBT         = FRM_DEBT / 1000000 "
-					   + "     , BFE_FRM_DEBT     = BFE_FRM_DEBT / 1000000 "
-					   + "     , THS_TOT_CAP      = THS_TOT_CAP / 1000000 "
-					   + "     , FRM_TOT_CAP      = FRM_TOT_CAP / 1000000 "
-					   + "     , BFE_FRM_TOT_CAP  = BFE_FRM_TOT_CAP / 1000000 "
-					   + "WHERE STOCK_CODE = '032680'";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.execute();
-			pstmt.clearParameters();
-			
-			sql = "UPDATE UNIQUE_CORPBLANACE "
-				+ "   SET THS_INCOME = 5439414713 "
-				+ "     , FRM_INCOME = 3321786667 "
-				+ "     , BFE_FRM_INCOME = 1653483263 "
-				+ " WHERE STOCK_CODE = '404990'";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.execute();
-			pstmt.clearParameters();
-			
-			sql = "UPDATE UNIQUE_CORPBLANACE C "
-					+ "   SET (C.EPS, C.PER, C.BPS, C.PBR) = "
-					+ "( "
-					+ "SELECT ROUND(A.THS_INCOME / B.LST_GST_CNT,2)                 AS  EPS "
-					+ "     , ROUND(NVL(B.CLPR / DECODE((A.THS_INCOME / B.LST_GST_CNT),0,NULL,(A.THS_INCOME / B.LST_GST_CNT)),0),2)    AS  PER "
-					+ "     , ROUND(A.THS_TOT_CAP / B.LST_GST_CNT,2)                AS  BPS "
-					+ "     , ROUND(NVL(B.CLPR / DECODE((A.THS_TOT_CAP / B.LST_GST_CNT),0,NULL,(A.THS_TOT_CAP / B.LST_GST_CNT)),0),2)     AS  PBR "
-					+ "  FROM HWANG.UNIQUE_CORPBLANACE  A "
-					+ "     , HWANG.UNIQUE_CORPSTOCK    B "
-					+ " WHERE A.STOCK_CODE = B.STOCK_CODE "
-					+ "   AND A.STOCK_CODE = C.STOCK_CODE "
-					+ "   AND B.BASE_YMD = (SELECT MAX(BASE_YMD) FROM UNIQUE_CORPSTOCK))";
-			pstmt = conn.prepareStatement(sql);
-			pstmt.execute();
-			pstmt.clearParameters();
-			
+			if(tnf) {
+				sql = "UPDATE UNIQUE_CORPBLANACE "
+				    + "   SET THS_INCOME       = THS_INCOME / 1000000 "
+				    + "     , FRM_INCOME       = FRM_INCOME / 1000000 "
+				    + "     , BFE_FRM_INCOME   = BFE_FRM_INCOME / 1000000 "
+				    + "     , THS_ASSETS       = THS_ASSETS / 1000000 "
+				    + "     , FRM_ASSETS       = FRM_ASSETS / 1000000 "
+				    + "     , BFE_FRM_ASSETS   = BFE_FRM_ASSETS / 1000000 "
+				    + "     , THS_DEBT         = THS_DEBT / 1000000 "
+				    + "     , FRM_DEBT         = FRM_DEBT / 1000000 "
+				    + "     , BFE_FRM_DEBT     = BFE_FRM_DEBT / 1000000 "
+				    + "     , THS_TOT_CAP      = THS_TOT_CAP / 1000000 "
+				    + "     , FRM_TOT_CAP      = FRM_TOT_CAP / 1000000 "
+				    + "     , BFE_FRM_TOT_CAP  = BFE_FRM_TOT_CAP / 1000000 "
+				    + "WHERE STOCK_CODE = '032680'";
+				pstmt = conn.prepareStatement(sql);
+				pstmt.execute();
+			} else if(!tnf) {
+				sql = "UPDATE UNIQUE_CORPBLANACE "
+						+ "   SET THS_INCOME = 5439414713 "
+						+ "     , FRM_INCOME = 3321786667 "
+						+ "     , BFE_FRM_INCOME = 1653483263 "
+						+ " WHERE STOCK_CODE = '404990'";
+					pstmt = conn.prepareStatement(sql);
+					pstmt.execute();
+			}
 			
 			conn.commit();
 			pstmt.close();
@@ -205,7 +196,6 @@ public class Reprtinsert {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 	}
 
 	private void Insertdb(Reprtbean rb) {
@@ -277,26 +267,26 @@ public class Reprtinsert {
 			e.printStackTrace();
 		}
 	}
-
-	private void updatedb(Infobean ib) {
-
-		Connection conn = Connect.getInstance();
-		PreparedStatement pstmt = null;
-
-		try {
-			String sql = "UPDATE HWANG.UNIQUE_CORPCODE SET JURIR_NO='', BIZR_NO=''" + "WHERE CORP_CODE=?";
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1, ib.getCorpCode());
-
-			pstmt.execute();
-
-			pstmt.close();
-			Connect.setClose();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	/*
+		private void updatedb(Infobean ib) {
+	
+			Connection conn = Connect.getInstance();
+			PreparedStatement pstmt = null;
+	
+			try {
+				String sql = "UPDATE HWANG.UNIQUE_CORPCODE SET JURIR_NO='', BIZR_NO=''" + "WHERE CORP_CODE=?";
+				pstmt = conn.prepareStatement(sql);
+	
+				pstmt.setString(1, ib.getCorpCode());
+	
+				pstmt.execute();
+	
+				pstmt.close();
+				Connect.setClose();
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}*/
 	
 	private void income(JSONObject result, Reprtbean bean) {
 		// 당기순이익(지배)

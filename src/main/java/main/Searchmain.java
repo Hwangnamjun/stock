@@ -20,6 +20,7 @@ import main.casecorp.Reprtparse;
 import main.casecorp.Reprturl;
 import main.casestock.Stockparse;
 import main.casestock.Stockinsert;
+import main.casestock.Stockparm;
 import main.casestock.Stockurl;
 import main.checkparameter.Checkymd;
 import util.Customexception;
@@ -29,23 +30,22 @@ import util.dupDateDel;
 
 public class Searchmain {
 
-	public void testall() {
+	public void testall(Infobean parm) {
 		Connection conn = Connect.getInstance();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 
+		String startDt = parm.getStartDT();
+		String endDt = parm.getEndDT();
+		int division = Integer.parseInt(parm.getTarget());
+		
 		ArrayList<Infobean> arr = new ArrayList<Infobean>();
-		String sql = "SELECT A.CORP_CODE, A.STOCK_CODE, A.CORP_NAME, A.BIZR_NO, A.INDUTY_CODE, a.jurir_no "
-				   + "  FROM HWANG.UNIQUE_CORPCODE A, HWANG.UNIQUE_CORPBLANACE B " 
+		String sql = "SELECT A.CORP_CODE, A.STOCK_CODE, A.CORP_NAME, A.BIZR_NO, A.INDUTY_CODE, A.JURIR_NO "
+				   + "  FROM HWANG.UNIQUE_CORPCODE A, HWANG.UNIQUE_CORPBLANACE B "
 				   + " WHERE A.STOCK_CODE = B.STOCK_CODE"
-				   + "   AND A.JURIR_NO IS NOT NULL"
-				   + "   AND A.STOCK_CODE IN (SELECT STOCK_CODE "
-				   + "  FROM UNIQUE_CORPSTOCK "
-				   + " GROUP BY STOCK_CODE "
-				   + "HAVING MAX(BASE_YMD) != '20230418')";
+				   + "   AND A.JURIR_NO IS NOT NULL";
 
 		try {
-			System.out.println(conn.isClosed());
 			pstmt = conn.prepareStatement(sql);
 			rs = pstmt.executeQuery();
 			while (rs.next()) {
@@ -55,8 +55,8 @@ public class Searchmain {
 				bean.setTarget(rs.getString(3));
 				bean.setPageRow("1000");
 				bean.setPageNo("1");
-				bean.setStartDT("20230331");
-				bean.setEndDT("20230412");
+				bean.setStartDT(startDt);
+				bean.setEndDT(endDt);
 				bean.setCrno(rs.getString(6));
 				arr.add(bean);
 			}
@@ -68,24 +68,36 @@ public class Searchmain {
 			e.printStackTrace();
 		}
 		int cnt = arr.size();
-		for (int i = 0; i < arr.size(); i++) {
+		
+		// 0 : 제무재표, 1 : 주식시세
+		if(division == 0) {
+			for (int i = 0; i < arr.size(); i++) {
 
-			try {
-				Thread.sleep(100);
-			} catch (InterruptedException e) {
-				e.printStackTrace();
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.print((i + 1) + "/" + cnt + " (" + arr.get(i).getTarget()+ ") : ");
+				String reprtUrl = new Reprturl().chkUrl(arr.get(i));
+				String reprtResult = new Reprtparse().getDate(reprtUrl);
+				System.out.println(new Reprtinsert().insertData(reprtResult, arr.get(i)));
 			}
-			System.out.print((i + 1) + "/" + cnt + " (" + arr.get(i).getTarget()+ ") : ");
-			/*			String reprtUrl = new Reprturl().chkUrl(arr.get(i));
-						String reprtResult = new Reprtparse().getDate(reprtUrl);
-						System.out.println(new Reprtinsert().insertData(reprtResult, arr.get(i)));
-						new Reprtinsert().Updateparm();*/
-
-
-			String stockUrl = new Stockurl().chkUrl(arr.get(i)); 
-			String stockResult = new Stockparse().getData(stockUrl); 
-			new	Stockinsert().insertData(stockResult,arr.get(i));
+		} else if(division == 1) {
+			
+			for (int i = 0; i < arr.size(); i++) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+				System.out.print((i + 1) + "/" + cnt + " (" + arr.get(i).getTarget()+ ") : ");
+				String stockUrl = new Stockurl().chkUrl(arr.get(i)); 
+				String stockResult = new Stockparse().getData(stockUrl); 
+				new	Stockinsert().insertData(stockResult,arr.get(i));
+			}
 		}
+		System.out.println(new Stockparm().setData());
 	}
 
 	public void Updatecode() {
@@ -133,7 +145,7 @@ public class Searchmain {
 			new Checkymd().findDb(bean);
 		}
 		// 2. 중복검색 데이터 정리
-		new dupDateDel().delDb();
+		//new dupDateDel().delDb();
 		// 3. 출력
 		result = new printResult().print(bean);
 		// 4. 검색시 사용한 문자열 재정의(대소문자,코드 검색 -> 정식명칭 변경)

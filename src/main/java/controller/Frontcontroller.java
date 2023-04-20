@@ -32,55 +32,46 @@ public class Frontcontroller extends HttpServlet{
 		switch (command) {
 		
 		case "/mainview/search.it":
-			
 			action = new Searchaction();
 			forward = action.execute(request, response);
 			break;
 		
 		case "/mainview/resultTable.it":
-			
 			forward=new Actionforward();
 			forward.setPath("/mainview/ResultTable.jsp");
 			break;
 		
 		case "/mainview/resultChart.it":
-			
 			forward=new Actionforward();
 			forward.setPath("/mainview/ResultChart.jsp");
 			break;
 			
 		case "/mainview/corp.it":
-			
 			action = new Updatedbaction();
 			forward = action.execute(request, response);
 			break;
 			
 		case "/mainview/detail.it":
-			
 			forward=new Actionforward();
 			forward.setPath("/mainview/ResultDetail.jsp");
 			break;
 			
 		case "/mainview/ajaxChart.it":
-			
 			action = new Ajaxaction();
 			forward = action.execute(request, response);
 			break;
 			
 		case "/mainview/ajaxKategorie.it":
-			
 			action = new Kategorieaction().settingbool(true);
 			forward = action.execute(request, response);
 			break;
 			
 		case "/mainview/ajaxKategorie2.it":
-			
 			action = new Kategorieaction().settingbool(false);
 			forward = action.execute(request, response);
 			break;
 			
 		case "/mainview/dashBoard.it":
-			
 			forward=new Actionforward();
 			forward.setPath("/mainview/ResultDashboard.jsp");
 			break;
