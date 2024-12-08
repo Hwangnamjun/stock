@@ -1,10 +1,6 @@
 <component name="libraryTable">
   <library name="main">
-    <CLASSES>
-      <root url="jar://$PROJECT_DIR$/src/main/json-simple-1.1.1.jar!/" />
-      <root url="jar://$PROJECT_DIR$/src/main/commons-io-2.18.0.jar!/" />
-      <root url="jar://$PROJECT_DIR$/src/main/servlet-api.jar!/" />
-    </CLASSES>
+    <CLASSES />
     <JAVADOC />
     <SOURCES />
   </library>
