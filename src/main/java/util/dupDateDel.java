@@ -15,10 +15,10 @@ public class dupDateDel {
 		String sql;
 		
 		try {
-			sql = 	  "DELETE FROM HWANG.UNIQUE_CORPSTOCK A"
+			sql = 	  "DELETE FROM DBA.UNIQUE_CORPSTOCK A"
 					+ " WHERE ROWID > ("
 					+ "SELECT MIN(ROWID) "
-					+ "  FROM HWANG.UNIQUE_CORPSTOCK b"
+					+ "  FROM DBA.UNIQUE_CORPSTOCK b"
 					+ " WHERE b.BASE_YMD = a.BASE_YMD"
 					+ "   AND B.STOCK_CODE = A.STOCK_CODE)";
 			pstmt = conn.prepareStatement(sql);

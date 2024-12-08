@@ -77,7 +77,7 @@ public class Reprturl {
 				PreparedStatement pstmt = null;
 				String sql;
 
-				  sql = "UPDATE HWANG.UNIQUE_CORPCODE SET JURIR_NO=?, BIZR_NO=?, INDUTY_CODE=?"
+				  sql = "UPDATE DBA.UNIQUE_CORPCODE SET JURIR_NO=?, BIZR_NO=?, INDUTY_CODE=?"
 					   + "WHERE CORP_CODE=?";
 				pstmt = conn.prepareStatement(sql);
 

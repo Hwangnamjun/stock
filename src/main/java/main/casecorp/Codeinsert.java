@@ -101,7 +101,7 @@ public class Codeinsert {
 			Element root = document.getDocumentElement();
 			NodeList childList = root.getChildNodes();
 			
-			String sql = "INSERT INTO HWANG.UNIQUE_CORPCODE_T(CORP_CODE, CORP_NAME, STOCK_CODE, MODIFY_YMD)"
+			String sql = "INSERT INTO DBA.UNIQUE_CORPCODE_T(CORP_CODE, CORP_NAME, STOCK_CODE, MODIFY_YMD)"
 					   + "VALUES (?,?,?,?)";
 			pstmt = conn.prepareStatement(sql); 
 			
@@ -157,7 +157,7 @@ public class Codeinsert {
 			    pstmt.clearParameters();
 			    
 		    	sql =     " MERGE "
-			    		+ "  INTO HWANG.UNIQUE_CORPCODE A "
+			    		+ "  INTO DBA.UNIQUE_CORPCODE A "
 			    		+ " USING ( "
 			    		+ "SELECT * FROM UNIQUE_CORPCODE_T WHERE CORP_CODE IN ( "
 			    		+ "SELECT CORP_CODE FROM ( "
@@ -186,7 +186,7 @@ public class Codeinsert {
 		    pstmt.clearBatch();
 		    pstmt.clearParameters();
 		    
-		    sql = "TRUNCATE TABLE HWANG.UNIQUE_CORPCODE_T";
+		    sql = "TRUNCATE TABLE DBA.UNIQUE_CORPCODE_T";
 		    
 		    pstmt = conn.prepareStatement(sql);
 		    pstmt.execute();
@@ -194,8 +194,8 @@ public class Codeinsert {
 		    pstmt.clearParameters();
 		    
 		    sql = "UPDATE UNIQUE_CORPCODE A "
-	    		+ "   SET A.INDUTY_NAME = (SELECT B.INDUTY_NAME FROM HWANG.INDUTY_CODE_LIB B WHERE B.INDUTY_CODE = SUBSTR(A.INDUTY_CODE,0,2)) "
-	    		+ "     , A.INDUTY_CODE_SIMPLE = (SELECT C.INDUTY_CODE_SIMPLE FROM HWANG.INDUTY_CODE_LIB C WHERE C.INDUTY_CODE = SUBSTR(A.INDUTY_CODE,0,2))"
+	    		+ "   SET A.INDUTY_NAME = (SELECT B.INDUTY_NAME FROM DBA.INDUTY_CODE_LIB B WHERE B.INDUTY_CODE = SUBSTR(A.INDUTY_CODE,0,2)) "
+	    		+ "     , A.INDUTY_CODE_SIMPLE = (SELECT C.INDUTY_CODE_SIMPLE FROM DBA.INDUTY_CODE_LIB C WHERE C.INDUTY_CODE = SUBSTR(A.INDUTY_CODE,0,2))"
 	    		+ " WHERE A.BIZR_NO IS NOT NULL";
 		    
 		    pstmt = conn.prepareStatement(sql);

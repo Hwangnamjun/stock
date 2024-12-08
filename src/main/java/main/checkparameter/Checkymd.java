@@ -25,7 +25,7 @@ public class Checkymd {
 		Connection conn = Connect.getInstance();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT MIN(BASE_YMD),MAX(BASE_YMD) FROM HWANG.UNIQUE_CORPSTOCK WHERE STOCK_CODE = ?";
+		String sql = "SELECT MIN(BASE_YMD),MAX(BASE_YMD) FROM DBA.UNIQUE_CORPSTOCK WHERE STOCK_CODE = ?";
 		
 		try {
 			pstmt = conn.prepareStatement(sql);

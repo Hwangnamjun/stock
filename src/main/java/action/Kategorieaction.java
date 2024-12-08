@@ -31,7 +31,7 @@ public class Kategorieaction implements Action {
 		
 		if(chk) {
 	       sql = "SELECT B.CORP_NAME, B.CORP_CODE, A.* "
-			   + "  FROM HWANG.UNIQUE_CORPBLANACE A, HWANG.UNIQUE_CORPCODE B "
+			   + "  FROM DBA.UNIQUE_CORPBLANACE A, DBA.UNIQUE_CORPCODE B "
 			   + " WHERE A.STOCK_CODE = B.STOCK_CODE "
 			   + "   AND B.INDUTY_CODE_SIMPLE = ?";
 			
@@ -59,7 +59,7 @@ public class Kategorieaction implements Action {
 		}
 		else {
 			sql = "SELECT * "
-					+ "FROM HWANG.UNIQUE_CORPSTOCK A, HWANG.UNIQUE_CORPCODE B "
+					+ "FROM DBA.UNIQUE_CORPSTOCK A, DBA.UNIQUE_CORPCODE B "
 					+ "WHERE A.STOCK_CODE = B.STOCK_CODE "
 					+ "  AND SUBSTR(A.BASE_YMD,0,6) = TO_CHAR(ADD_MONTHS(SYSDATE,-1) ,'YYYYMM') "
 					+ "  AND B.INDUTY_CODE_SIMPLE = ? "

@@ -17,11 +17,11 @@ public class Searchchk {
 		ResultSet rs = null;
 		bean.setKonglish(new Changekonglish().changeWord(bean.getTarget()));
 		String sql = "SELECT CORP_CODE,STOCK_CODE,BIZR_NO, MODIFY_YMD "
-					 + "FROM HWANG.UNIQUE_CORPCODE "
+					 + "FROM DBA.UNIQUE_CORPCODE "
 					+ "WHERE CORP_NAME IN (?,?) "
 					+ "UNION "
 				   + "SELECT CORP_CODE,STOCK_CODE,BIZR_NO, MODIFY_YMD "
-					 + "FROM HWANG.UNIQUE_CORPCODE "
+					 + "FROM DBA.UNIQUE_CORPCODE "
 					+ "WHERE STOCK_CODE = ? "
 					+ "ORDER BY MODIFY_YMD DESC";
 		try {

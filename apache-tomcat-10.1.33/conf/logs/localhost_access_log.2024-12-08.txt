@@ -1,0 +1,5 @@
+0:0:0:0:0:0:0:1 - - [08/Dec/2024:11:47:57 +0900] "GET /mainview/search.it HTTP/1.1" 404 830
+0:0:0:0:0:0:0:1 - - [08/Dec/2024:11:48:11 +0900] "GET /mainview/search.it HTTP/1.1" 404 830
+0:0:0:0:0:0:0:1 - - [08/Dec/2024:11:48:14 +0900] "GET /mainview/search.it HTTP/1.1" 404 830
+0:0:0:0:0:0:0:1 - - [08/Dec/2024:11:48:27 +0900] "GET /stock/mainview/search.it HTTP/1.1" 404 840
+0:0:0:0:0:0:0:1 - - [08/Dec/2024:11:48:28 +0900] "GET /stock/mainview/search.it HTTP/1.1" 404 840

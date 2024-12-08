@@ -1,12 +1,9 @@
 package connection;
 
+import javax.naming.NamingException;
 import java.sql.Connection;
 import java.sql.SQLException;
-
-import javax.naming.Context;
-import javax.naming.InitialContext;
-import javax.naming.NamingException;
-import javax.sql.DataSource;
+import java.sql.DriverManager;
 
 
 public class Connect {
@@ -17,17 +14,23 @@ public class Connect {
 
 		if(conn == null) {
 			try {
-	            Context ctx = new InitialContext();
-	            Context envContext = (Context) ctx.lookup("java:/comp/env");
-	            DataSource dataFactory = (DataSource) envContext.lookup("jdbc/oracle");
-				
-				conn = dataFactory.getConnection();
+				String url = "jdbc:mysql://192.168.50.69:3306/DBA";
+				String user = "dudrn0585";
+				String password = "wjsdur2015!";
+
+				// JDBC 드라이버 로드
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				conn = DriverManager.getConnection(url, user, password);
+				System.out.println("연결 완료");
+
+			} catch(ClassNotFoundException e) {
+				System.out.println("JDBC 드라이버 로드하는데 문제 발생 : " + e.getMessage());
+				e.printStackTrace();
 			} catch (SQLException e) {
+				System.out.println("연결 오류 : " + e.getMessage());
 				e.printStackTrace();
-			} catch (NamingException e) {
-				e.printStackTrace();
-			}
-		}
+            }
+        }
 		return conn;
 	}
 	

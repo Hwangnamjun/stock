@@ -39,7 +39,7 @@ public class Searchmain {
 		
 		ArrayList<Infobean> arr = new ArrayList<Infobean>();
 		String sql = "SELECT A.CORP_CODE, A.STOCK_CODE, A.CORP_NAME, A.BIZR_NO, A.INDUTY_CODE, A.JURIR_NO "
-				   + "  FROM HWANG.UNIQUE_CORPCODE A, HWANG.UNIQUE_CORPBLANACE B "
+				   + "  FROM DBA.UNIQUE_CORPCODE A, DBA.UNIQUE_CORPBLANACE B "
 				   + " WHERE A.STOCK_CODE = B.STOCK_CODE"
 				   + "   AND A.JURIR_NO IS NOT NULL";
 

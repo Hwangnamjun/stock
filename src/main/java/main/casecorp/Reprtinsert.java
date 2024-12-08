@@ -203,7 +203,7 @@ public class Reprtinsert {
 		Connection conn = Connect.getInstance();
 		PreparedStatement pstmt = null;
 		String sql = " MERGE "
-				   + "  INTO HWANG.UNIQUE_CORPBLANACE A "
+				   + "  INTO DBA.UNIQUE_CORPBLANACE A "
 				   + " USING DUAL "
 				   + "    ON (A.STOCK_CODE = ?) "
 				   + "  WHEN MATCHED THEN "
@@ -274,7 +274,7 @@ public class Reprtinsert {
 			PreparedStatement pstmt = null;
 	
 			try {
-				String sql = "UPDATE HWANG.UNIQUE_CORPCODE SET JURIR_NO='', BIZR_NO=''" + "WHERE CORP_CODE=?";
+				String sql = "UPDATE DBA.UNIQUE_CORPCODE SET JURIR_NO='', BIZR_NO=''" + "WHERE CORP_CODE=?";
 				pstmt = conn.prepareStatement(sql);
 	
 				pstmt.setString(1, ib.getCorpCode());
@@ -329,7 +329,7 @@ public class Reprtinsert {
 		Connection conn = Connect.getInstance();
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
-		String sql = "SELECT CUR_UNIT, DEAL_BAS_R FROM HWANG.EXCHANGE_MONEY";
+		String sql = "SELECT CUR_UNIT, DEAL_BAS_R FROM DBA.EXCHANGE_MONEY";
 		
 		pstmt = conn.prepareStatement(sql);
 		

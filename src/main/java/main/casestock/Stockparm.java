@@ -15,10 +15,10 @@ public class Stockparm {
 		String sql;
 		
 		try {
-			sql = 	  "DELETE FROM HWANG.UNIQUE_CORPSTOCK A"
+			sql = 	  "DELETE FROM DBA.UNIQUE_CORPSTOCK A"
 					+ " WHERE ROWID > ("
 					+ "SELECT MIN(ROWID) "
-					+ "  FROM HWANG.UNIQUE_CORPSTOCK b"
+					+ "  FROM DBA.UNIQUE_CORPSTOCK b"
 					+ " WHERE b.BASE_YMD = a.BASE_YMD"
 					+ "   AND B.STOCK_CODE = A.STOCK_CODE)";
 			pstmt = conn.prepareStatement(sql);
@@ -34,8 +34,8 @@ public class Stockparm {
 					+ "     , ROUND(NVL(B.CLPR / DECODE((A.THS_INCOME / B.LST_GST_CNT),0,NULL,(A.THS_INCOME / B.LST_GST_CNT)),0),2)    AS  PER "
 					+ "     , ROUND(A.THS_TOT_CAP / B.LST_GST_CNT,2)                AS  BPS "
 					+ "     , ROUND(NVL(B.CLPR / DECODE((A.THS_TOT_CAP / B.LST_GST_CNT),0,NULL,(A.THS_TOT_CAP / B.LST_GST_CNT)),0),2)     AS  PBR "
-					+ "  FROM HWANG.UNIQUE_CORPBLANACE  A "
-					+ "     , HWANG.UNIQUE_CORPSTOCK    B "
+					+ "  FROM DBA.UNIQUE_CORPBLANACE  A "
+					+ "     , DBA.UNIQUE_CORPSTOCK    B "
 					+ " WHERE A.STOCK_CODE = B.STOCK_CODE "
 					+ "   AND A.STOCK_CODE = C.STOCK_CODE "
 					+ "   AND B.BASE_YMD = (SELECT MAX(BASE_YMD) FROM UNIQUE_CORPSTOCK))";

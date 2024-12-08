@@ -64,7 +64,7 @@ public class Stockinsert {
 		PreparedStatement pstmt = null;
 		
 		try {
-			String sql = "INSERT INTO HWANG.UNIQUE_CORPSTOCK "
+			String sql = "INSERT INTO DBA.UNIQUE_CORPSTOCK "
 					   + "VALUES(?,?,?,?,?,?,?,?,?,?,?,?,?)";
 			pstmt = conn.prepareStatement(sql);
 			

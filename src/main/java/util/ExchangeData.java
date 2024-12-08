@@ -76,7 +76,7 @@ public class ExchangeData {
 				Connection conn = Connect.getInstance();
 				PreparedStatement pstmt = null;
 				String sql = " MERGE "
-						+ "  INTO HWANG.EXCHANGE_MONEY A "
+						+ "  INTO DBA.EXCHANGE_MONEY A "
 						+ " USING DUAL "
 						+ "    ON (A.CUR_UNIT = ?) "
 						+ "  WHEN MATCHED THEN "

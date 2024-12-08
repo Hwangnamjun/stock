@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<Context docBase="C:\Users\skawn\IdeaProjects\stock">
+  <Resources cacheMaxSize="10240">
+    <PreResources base="C:/Users/skawn/IdeaProjects/stock/target/classes" className="org.apache.catalina.webresources.DirResourceSet" webAppMount="/WEB-INF/classes"/>
+    <PostResources base="C:/Users/skawn/.m2/repository/com/googlecode/json-simple/json-simple/1.1.1/json-simple-1.1.1.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/json-simple-1.1.1.jar"/>
+    <PostResources base="C:/Users/skawn/.m2/repository/junit/junit/4.10/junit-4.10.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/junit-4.10.jar"/>
+    <PostResources base="C:/Users/skawn/.m2/repository/org/hamcrest/hamcrest-core/1.1/hamcrest-core-1.1.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/hamcrest-core-1.1.jar"/>
+    <PostResources base="C:/Users/skawn/.m2/repository/commons-io/commons-io/2.18.0/commons-io-2.18.0.jar" className="org.apache.catalina.webresources.FileResourceSet" webAppMount="/WEB-INF/lib/commons-io-2.18.0.jar"/>
+  </Resources>
+</Context>
